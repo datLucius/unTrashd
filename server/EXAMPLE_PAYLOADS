@@ -10,25 +10,29 @@ USER
             title: "Net Man (Level II)",
             description: "You've tagged 5 nets."
         }
-    ]
-
-
+    ],
+    count: 5,
+    most_tagged: "metal",
+    days_since: 3,
+    days_tagging: 2,
+    level: "SCRUB",
+    rank: 2
 }
 
 GEAR
 
 {
-    image_name: "19384919213891239.jpg",
+    image: "BASE64BASE64",
     tags: ["metal"],
     tagged_on: 9000005555,
     tagged_by: "test_user",
-    location: "ffff"
-
+    location: [222, 333]
 }
 
 TAGS
 
 {
     tag: "metal",
-    approved: true
+    approved: true,
+    icon: "asdfasdfsaf.jpg"
 }

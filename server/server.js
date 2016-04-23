@@ -132,6 +132,18 @@ MongoClient.connect(MONGO_URL, function(err, db) {
 
     app.use(bodyParser.json());
 
+    app.get('/leaderboard', function(req, res) {
+        gear.aggregate(
+            [
+                { $group: { _id: "$tagged_by", count: { $sum: 1 } } },
+                { $sort: { number: -1 } },
+                { $limit: 10 }
+            ]
+        ).toArray().then(function(items) {
+            res.send(items);
+        });
+    });
+
     app.get('/users/:user_name', function(req, res) {
         users.findOne({_id: req.params.user_name})
             .then(getGearStats)
@@ -237,7 +249,7 @@ MongoClient.connect(MONGO_URL, function(err, db) {
             tagged_on: new Date().getTime(),
             tagged_by: req.body.tagged_by,
             tags: req.body.tags,
-            image_name: req.body.image_name,
+            image: req.body.image,
             location: req.body.location
         };
         gear.insert(new_gear)
