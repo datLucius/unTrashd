@@ -4,9 +4,48 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('inputTabDefaultPageCtrl', function($scope, $cordovaCamera) {
+.controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService ) {
 
-    $scope.takePhoto = function () {
+  $scope.$on('$ionicView.enter', function() {
+
+  geoLocationService.getLocation().then(function(result){
+           $scope.location = result
+         })
+})
+  $scope.form = {};
+
+  var vm = this;
+
+    // Initialize the database.
+ $ionicPlatform.ready(function() {
+     itemService.initDB();
+
+     // Get all asset records from the database.
+     itemService.getAllItems().then(function(items) {
+         vm.items = items;
+         console.log("all the items", vm.items)
+         console.log("more photo", vm.items.imageData);
+     });
+ });
+
+ $scope.saveItem = function() {
+  // if ($scope.isAdd) {
+     itemService.addItem($scope.form);
+      //console.log($scope.form);
+//  } else {
+//      itemService.updateItem($scope.form);
+//  }
+
+    //  $scope.reset();
+
+  };
+
+
+
+
+
+  $scope.takePhoto = function () {
+    console.log("taking a photo");
         var options = {
           quality: 75,
           destinationType: Camera.DestinationType.DATA_URL,
@@ -20,10 +59,12 @@ angular.module('app.controllers', [])
       };
 
           $cordovaCamera.getPicture(options).then(function (imageData) {
-              $scope.imgURI = "data:image/jpeg;base64," + imageData;
+              $scope.form.imgURI = "data:image/jpeg;base64," + imageData;
           }, function (err) {
               // An error occured. Show a message to the user
           });
+        //  console.log("the photo", imgURI);
+        //  $scope.form.photo = $scope.imgURI;
       }
 
       $scope.choosePhoto = function () {
@@ -47,6 +88,7 @@ angular.module('app.controllers', [])
        }
 
 
+       return vm;
 })
 
 .controller('statsTabDefaultPageCtrl', function($scope) {

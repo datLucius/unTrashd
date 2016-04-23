@@ -15,12 +15,28 @@
   </div>
   <div class="col text-right">
   <a ng-click="deleteBirthday()" style="text-decoration: none"><div class="ion-trash-a trash-icon" style="font-size:35px; margin-right: 5px"></div> </a>
-  <a ng-click="saveBirthday()" style="text-decoration: none"><div class="ion-android-done save-icon" style="font-size:35px; margin-right: 5px"></div> </a>
+  <a ng-click="saveItem()" style="text-decoration: none"><div class="ion-android-done save-icon" style="font-size:35px; margin-right: 5px"></div> </a>
 
   </div>
   </ion-header-bar>
    <ion-content style="margin-top: 20px" overflow-scroll="true" padding="true" class="has-header">
+     <div>w where the photos?</div>
+     <ion-item ng-repeat="b in vm.items track by $index"   ng-click="vm.showEditView(b)"> photo should be here
+                        <div class="assetLeft">
+                        <p style="font-weight: bold">{{b.description}}: {{b.make}}</p>
+                        <p>{{b.barcode}}</p>
+                        </div>
+                        <div>{{$scope.form.imgURI}}</div>
+                        <div>{form.imgURI}</div>
+                        <div>{{imgURI}}</div>
+                        <div>{{b.imgURI}}</div>
+                        <div class="assetRight">
+                       <p>{{b.received_date| date:"dd MMMM yyyy"}}</p>
+                        <p>{{b.department_id}}</p>
+                        </div>
 
+                       <!--  <div style="float: right">{{ b.Date | date:"dd MMMM yyyy" }}</div> -->
+                      </ion-item>
       <form class="list">
         <div class="cameraRight">
         <a ng-click="takePhoto()" style="text-decoration: none"><div class="ion-ios-camera-outline" style="font-size:55px; margin-right: 5px"></div></a>
