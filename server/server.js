@@ -6,12 +6,12 @@ var bodyParser = require('body-parser');
 var request = require('superagent');
 var Promise = require('bluebird');
 var badges = require('./badges');
+var _ = require('lodash');
 
 var MONGO_URL = 'mongodb://localhost:27017/untrashd';
 var GIS_URL = "http://tela.roktech.net/arcgis/rest/services/Demos/fishackathonGhostGearBusters/FeatureServer/0/applyEdits";
 
 function addFeature(gear) {
-    console.log(gear);
     var adds = [{
         geometry: {
             x: gear.location[0],
@@ -39,6 +39,27 @@ function addFeature(gear) {
     });
 }
 
+function days_between(date1, date2) {
+
+    // The number of milliseconds in one day
+    var ONE_DAY = 1000 * 60 * 60 * 24
+
+    // Convert both dates to milliseconds
+    var date1_ms = date1.getTime()
+    var date2_ms = date2.getTime()
+
+    // Calculate the difference in milliseconds
+    var difference_ms = Math.abs(date1_ms - date2_ms)
+
+    // Convert back to days and return
+    return Math.round(difference_ms/ONE_DAY)
+
+}
+
+function getLevel(points) {
+    if (points > -1) { return "SCRUB" };
+}
+
 MongoClient.connect(MONGO_URL, function(err, db) {
     assert.equal(null, err);
     console.log("Connected to mongoDb");
@@ -53,24 +74,76 @@ MongoClient.connect(MONGO_URL, function(err, db) {
         return gear;
     }
 
-    var getUserStats = function (user) {
-        return {};
+    //count, days since last tag, number of days with items, most common tag, level, rank
+    //
+
+    var getGearStats = function(user) {
+        if (!user) return;
+        return new Promise(function(resolve, reject) {
+            gear.find({tagged_by: user._id}).toArray(function(err, items) {
+                if (err) reject(err);
+                else {
+                    var tags = {};
+                    var dates = {};
+                    var highestTag = undefined;
+                    var most = 0;
+                    var last_tag = user.joined;
+                    items.forEach(function(item) {
+                        console.log(item);
+                        item.tags.forEach(function(tag) {
+                            tags[tag] = (tags[tag] || 0) + 1;
+                            if (tags[tag] > most) {
+                                most = tags[tag];
+                                highestTag = tag;
+                            }
+                        });
+                        if (item.tagged_on > last_tag) last_tag = item.tagged_on;
+                        dates[new Date(item.tagged_on).toDateString()] = true;
+                    });
+                    resolve(Object.assign({}, user,
+                        {
+                            count: items && items.length,
+                            most_tagged: highestTag,
+                            days_since: days_between(new Date(), new Date(last_tag)),
+                            days_tagging: Object.keys(dates).length,
+                            level: getLevel(user.points)
+                        }
+                    ));
+                }
+            });
+        });
+    }
+
+    var getRank = function(user) {
+        if (!user) return;
+        return new Promise(function(resolve, reject) {
+            gear.aggregate(
+                [
+                    { $group: { _id: "$tagged_by", number: { $sum: 1 } } },
+                    { $sort: { number: -1 } }
+                ]
+            ).toArray().then(function(items) {
+                resolve(Object.assign({}, user, {
+                    rank: _.findIndex(items, {_id: user._id})+1
+                }));
+            });
+        });
     }
 
     app.use(bodyParser.json());
 
     app.get('/users/:user_name', function(req, res) {
-        var p_user = users.findOne({_id: req.params.user_name});
-        p_user.then(function(user) {
-            if (user) {
-                getUserStats(user);
-                Object.assign(user, stats);
-                res.send(user);
-            }
-            else {
-                res.sendStatus(404);
-            }
-        });
+        users.findOne({_id: req.params.user_name})
+            .then(getGearStats)
+            .then(getRank)
+            .then(function(user) {
+                if (user) {
+                    res.send(user);
+                }
+                else {
+                    res.sendStatus(404);
+                }
+            });
     });
 
     app.post('/users', function(req, res) {
