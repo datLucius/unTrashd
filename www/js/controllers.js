@@ -98,17 +98,36 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('mapDefaultPageCtrl', function($scope, esriLoader) {
-                   var self = this;
-                   esriLoader.require(['esri/Map'], function(Map) {
-                       self.map = new Map({
-                           basemap: 'streets'
-                       });
-                   });
-               })
+.controller('mapDefaultPageCtrl', function($scope) {
+      // $scope.$on('$viewContentLoaded', function () {
+      //   var mapElement = document.getElementById('map')
+      //   mapElement.innerHTML = $scope.map
+      // })
+      // $scope.map =
 
-.controller('loginCtrl', function($scope) {
+})
 
+.controller('loginCtrl', function($scope, $state) {
+
+  $scope.login = function (acct) {
+
+    $scope.user = acct.userid;
+    console.log($scope.user);
+     localStorage.setItem("user", acct.userid);
+  //alert('you asked to login')
+  // authSvc.login(acct)
+  //   .then(function (result) {
+  //     // redirect to new scan page
+  //     if (result.ok) $state.go('')
+  //   })
+  //   .catch(function (err) {
+  //     $scope.error = 'Unable to accept account credentials'
+  //   })
+//$state.go('scans-new')
+ $state.go('tabsController.homeTabDefaultPage')
+
+
+}
 })
 
 .controller('signupCtrl', function($scope) {

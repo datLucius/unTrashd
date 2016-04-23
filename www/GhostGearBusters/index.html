@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="bootstrap/docs-assets/ico/favicon.ico">
+
+    <title>Ghost Gear Busters</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/fullmap-template.css" rel="stylesheet">
+
+    <!-- Bootstrap-map-js -->
+
+	<link rel="stylesheet" href="http://js.arcgis.com/3.16/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.16/esri/css/esri.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrapmap.css">  
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	
+    <style type="text/css">
+	#mapDiv {
+	  min-height: 100%; 
+	  max-height: 100%; 
+	}
+	#HomeButton{
+	  position: absolute;
+	  left:7px;
+	  margin-top:90px;
+	  z-index:1;
+	  width:30px;
+	  height:30px;
+	  background-color:#000000;
+	  border-radius:5px;
+	}
+	.esriSimpleSliderTL{
+		bottom: auto;
+		right: auto;
+		top: 15px;
+		left: 20px;
+	}
+	 #layersMenu{
+		float:right;
+		position: fixed;
+		right:10px;
+		top:75px;
+		z-index:1;
+		width:10px;
+		height:10px;
+	 } 
+    </style>
+   
+  </head>
+
+  <body class="claro">
+ 
+	<div class="row panel-group" id="" role="tablist" aria-multiselectable="true">
+		<!-- Bootstrap-map-js -->
+		<div id="map" class="col-sm-20 ">
+			<span id="HomeButton"></span>
+			<div id="layersMenu" class="btn-group btn-group-vertical panel-collapse collapse in" role="tabpanel" data-toggle="buttons" style="width:5%">
+				<label class="btn btn-warning" id="warnBtn">
+					<img src="img/icons/warn.png"/><input type="checkbox" autocomplete="off">
+				</label>
+				<br />
+				<label class="btn btn-info" id="precipBtn">
+					<img src="img/icons/rain.png"/><input type="checkbox" autocomplete="off">
+				</label>
+				<br />
+				<label class="btn btn-success" id="windBtn">
+					<img src="img/icons/wind.png"/><input type="checkbox" autocomplete="off">
+				</label>
+				<br />
+				<label class="btn btn-danger" id="stormBtn">
+					<img src="img/icons/storm.png"/><input type="checkbox" autocomplete="off">
+				</label>
+			</div>
+			<!-- <button id="LocateButton" title="Find My Location"  type="button" class="btn btn-sm btn-default-gray"><img src="img/location.png"></img></button> -->
+		</div>
+	</div>
+	
+    <script type="text/javascript">
+      var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+	  var dojoConfig = { parseOnLoad:true,
+   		paths: {
+    		
+            agsjs: location.pathname.replace(/\/[^/]+$/, '') + '/../agsjs' 
+            
+    	},
+		packages: [
+			{
+				name: "modules",
+                location: package_path + '/js'
+            },
+			{
+				name: "application",
+				location: package_path + '../../../src/js'
+			}
+			]
+	  };
+    </script> 
+    <script src="http://js.arcgis.com/3.16compact"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+    <!-- Bootstrap core JavaScript --> 
+   <!-- =============================== =================== -->
+    <!-- Placed at the end of the docume nt so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

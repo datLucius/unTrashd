@@ -1,5 +1,7 @@
 angular.module('app.services', [])
 
+
+
 .factory('geoLocationService', ['$q', '$http', function($q, $http){
 
   var getLocation = function() {
