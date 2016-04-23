@@ -13,3 +13,9 @@
 .trash-icon, .save-icon {
   display: inline-block;
 }
+
+.cameraRight {
+  float: right;
+}
+
+.bar { background-image: none !important; }

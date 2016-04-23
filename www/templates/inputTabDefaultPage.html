@@ -22,6 +22,15 @@
    <ion-content style="margin-top: 20px" overflow-scroll="true" padding="true" class="has-header">
 
       <form class="list">
+        <div class="cameraRight">
+        <a ng-click="takePhoto()" style="text-decoration: none"><div class="ion-ios-camera-outline" style="font-size:55px; margin-right: 5px"></div></a>
+        </div>
+        <div class="cameraRight">
+        <a ng-click="choosePhoto()" style="text-decoration: none"><div class="ion-ios-upload-outline" style="font-size:55px; margin-right: 5px"></div></a>
+        </div>
+        <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
+<br>
+<br>
               <label class="item item-input assetItem">
                   <span class="input-label">Description</span>
                   <input type="text" placeholder="" ng-model="birthday.description">
