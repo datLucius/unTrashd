@@ -1,0 +1,34 @@
+USER
+
+{
+    _id: "testUser",
+    joined: 900000000,
+    points: 10,
+    badges: [
+        {
+            id: "net2",
+            title: "Net Man (Level II)",
+            description: "You've tagged 5 nets."
+        }
+    ]
+
+
+}
+
+GEAR
+
+{
+    image_name: "19384919213891239.jpg",
+    tags: ["metal"],
+    tagged_on: 9000005555,
+    tagged_by: "test_user",
+    location: "ffff"
+
+}
+
+TAGS
+
+{
+    tag: "metal",
+    approved: true
+}
