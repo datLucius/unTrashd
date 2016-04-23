@@ -20,13 +20,13 @@
   </div>
   </ion-header-bar>
    <ion-content style="margin-top: 20px" overflow-scroll="true" padding="true" class="has-header">
-     <div>w where the photos?</div>
-     <ion-item ng-repeat="b in vm.items track by $index"   ng-click="vm.showEditView(b)"> photo should be here
+     <div>where the photos?</div>
+     <ion-item ng-repeat="b in vm.items track by $index"   ng-click="vm.showEditView(b)">
                         <div class="assetLeft">
                         <p style="font-weight: bold">{{b.description}}: {{b.make}}</p>
                         <p>{{b.barcode}}</p>
                         </div>
-                        <div>{{$scope.form.imgURI}}</div>
+                        <div>{{form.imgURI}}</div>
                         <div>{form.imgURI}</div>
                         <div>{{imgURI}}</div>
                         <div>{{b.imgURI}}</div>

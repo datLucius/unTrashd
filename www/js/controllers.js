@@ -59,12 +59,15 @@ angular.module('app.controllers', [])
       };
 
           $cordovaCamera.getPicture(options).then(function (imageData) {
-              $scope.form.imgURI = "data:image/jpeg;base64," + imageData;
+              $scope.imgURI = "data:image/jpeg;base64," + imageData;
+              //console.log("the photo", $scope.imgURI);
+              $scope.form.imgURI = $scope.imgURI;
+              console.log("form imgURI", $scope.form.imgURI);
           }, function (err) {
               // An error occured. Show a message to the user
           });
-        //  console.log("the photo", imgURI);
-        //  $scope.form.photo = $scope.imgURI;
+          console.log("the photo", imgURI);
+          $scope.form.photo = $scope.imgURI;
       }
 
       $scope.choosePhoto = function () {
@@ -95,9 +98,14 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('mapDefaultPageCtrl', function($scope) {
-
-})
+.controller('mapDefaultPageCtrl', function($scope, esriLoader) {
+                   var self = this;
+                   esriLoader.require(['esri/Map'], function(Map) {
+                       self.map = new Map({
+                           basemap: 'streets'
+                       });
+                   });
+               })
 
 .controller('loginCtrl', function($scope) {
 
