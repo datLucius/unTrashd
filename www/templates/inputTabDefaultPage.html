@@ -1,0 +1,96 @@
+<ion-view hide-nav-bar="true">
+  <ion-header-bar class="bar-clear" style="height: 60px">
+    <div class="col text-left">
+    <a ng-click="myGoBack()" style="text-decoration: none"><div class="ion-ios-close-empty glass-icon"  style="font-size:35px; margin-right: 5px"></div> </a>
+
+  </div>
+  <div>
+    <form>
+      <!-- <div class="button-bar"></div> -->
+    <h4>New Trash</h4>
+   <!-- <div class="item item-input" style="background-color: #00BFFF">
+          <input type="search" placeholder="" -->
+     </div>
+  </form>
+  </div>
+  <div class="col text-right">
+  <a ng-click="deleteBirthday()" style="text-decoration: none"><div class="ion-trash-a trash-icon" style="font-size:35px; margin-right: 5px"></div> </a>
+  <a ng-click="saveBirthday()" style="text-decoration: none"><div class="ion-android-done save-icon" style="font-size:35px; margin-right: 5px"></div> </a>
+
+  </div>
+  </ion-header-bar>
+   <ion-content style="margin-top: 20px" overflow-scroll="true" padding="true" class="has-header">
+
+      <form class="list">
+              <label class="item item-input assetItem">
+                  <span class="input-label">Description</span>
+                  <input type="text" placeholder="" ng-model="birthday.description">
+              </label>
+                <div class="assetListLine"></div>
+              <label class="item item-input assetItem">
+                  <span class="input-label">Make</span>
+                  <input type="text" placeholder="" ng-model="birthday.make">
+              </label>
+                <div class="assetListLine"></div>
+              <label class="item item-input assetItem">
+                  <span class="input-label">Model</span>
+                  <input type="text" placeholder="" ng-model="birthday.model">
+              </label>
+                <div class="assetListLine"></div>
+          <!-- </ion-list> -->
+          <label class="item item-input assetItem" ng-click="openDatePicker()">
+          <span class="input-label">Received</span>
+          <div id="received_date">{{isoDate | date: MM/dd/yyyy}}</div>
+      </label>
+            <div class="assetListLine"></div>
+          <label class="item item-input assetItem">
+              <span class="input-label">Value</span>
+              <input type="number" placeholder="" ng-model="birthday.value">
+          </label>
+            <div class="assetListLine"></div>
+          <ion-toggle class="assetItem" toggle-class="toggle-positive">Warranty</ion-toggle>
+            <div class="assetListLine"></div>
+          <label class="item item-input assetItem">
+              <span class="input-label">Serial Number</span>
+              <input type="text" placeholder="" ng-model="newAsset.serial_number">
+          </label>
+            <div class="assetListLine"></div>
+          <label class="item item-input assetItem">
+              <span class="input-label">Old Asset Number</span>
+              <input type="text" placeholder="" ng-model="newAsset.old_asset_number">
+          </label>
+            <div class="assetListLine"></div>
+          <label class="item item-select assetItem">
+              <span class="input-label">Department</span>
+              <select name="department" ng-model="birthday.department_id">
+                <option value="1">Accounting</option>
+                <option value="2">Robots</option>
+                <option value="3">Space Travel</option>
+              </select>
+          </label>
+            <div class="assetListLine"></div>
+          <label class="item item-select assetItem">
+              <span class="input-label">Person Responsible</span>
+              <select name="personResponsible" ng-model="birthday.person_responsible_id">
+                <option value="1">Philip J Fry</option>
+                <option value="2">Amy Wong</option>
+                <option value="3">Dr. Zoidberg</option>
+              </select>
+          </label>
+            <div class="assetListLine"></div>
+          <label class="item item-select assetItem">
+              <span class="input-label">Category</span>
+              <select name="category" ng-model="birthday.category_id">
+                <option value="1">Computer</option>
+                <option value="2">Robots</option>
+                <option value="3">Spaceship</option>
+              </select>
+          </label>
+            <div class="assetListLine"></div>
+        <!--   <a href="#/tabs/page11"><button class="button button-stable button-block ">Close</button></a> -->
+      </form>
+      <div style="height: 60px"></div>
+
+</ion-content>
+<!-- </ion-content> -->
+</ion-view>

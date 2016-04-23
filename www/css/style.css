@@ -1,0 +1,15 @@
+.fancy-line {
+    border-bottom:1px solid rgba(136,136,136,0.75);
+    position:relative;
+    background-color:#f4f4f4;
+}
+
+.upperTabLine {
+  width: 100%;
+  border-top: 2px solid #145fd7 !important;
+  top: 90px;
+}
+
+.trash-icon, .save-icon {
+  display: inline-block;
+}
