@@ -12,12 +12,12 @@
             <div style="width: 70%; display:flex; align-content:space-between">
               <div class="cameraRight" style="width: 50%; display: flex; justify-content: center;">
               <a ng-click="takePhoto()" style="text-decoration: none;">
-                <div class="ion-ios-camera-outline cyan" style="font-size:80px; margin-right: 5px"></div>
+                <div class="ion-ios-camera-outline cyan ionHover" style="font-size:80px; margin-right: 5px"></div>
               </a>
               </div>
               <div class="cameraRight" style="width: 50%; display: flex; justify-content: center;">
               <a ng-click="choosePhoto()" style="text-decoration: none;">
-                <div class="ion-ios-upload-outline cyan" style="font-size:70px; margin-right: 5px"></div>
+                <div class="ion-ios-upload-outline cyan ionHover" style="font-size:70px; margin-right: 5px"></div>
               </a>
               </div>
             </div>
@@ -35,7 +35,7 @@
               <img class="commonIcon" ng-src="common.imgSrc" ng-click="addChoice(commonChoice)"></img>
             </div>
           </div> -->
-          <div id="tagUpdateBox">
+          <div id="tagUpdateBox" style="padding-left:10px;">
             <div ng-if="allTags" ng-repeat="committedTag in allTags" class="committedTags" style="margin:10px;float:left;" ng-click="removeTag(committedTag)">
               <div class="tagName" style="display:inline-block; margin-right: 10px;" ng-click="removeTag(committedTag)">{{committedTag}}</div>
               <div class="removeX" ng-click="removeTag(committedTag)" style="display:inline-block">X</div>
@@ -49,7 +49,7 @@
               </div>
             </div>
         </div>
-          <div ng-click="postNewFind()" style="text-decoration: none;display:block;"><div class="suggestionBubble" style="text-align:center;height: 50px;width:100%;">Submit</div></div>
       </form>
+      <div ng-click="postNewFind()" style="text-decoration: none;display:block;"><div class="suggestionBubble" id="submitButton" style="text-align:center;height: 70px;line-height: 50px;width: 100%;position: fixed;bottom: -9px;left: 0;right: 0;">Submit</div></div>
   </ion-content>
 </ion-view>

@@ -4,6 +4,7 @@ angular.module('app.controllers', [])
   $scope.user = localStorage.getItem('user')
   $scope.allGrab = gearService.recent().then(function (res) {
     $scope.allRecent = res.data
+    console.log($scope.allRecent)
   })
   $scope.myGrab = gearService.recent($scope.user).then(function (res) {
     $scope.myRecent = res.data

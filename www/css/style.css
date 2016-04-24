@@ -118,7 +118,7 @@ h4 {
 }
 .unTrashedHeader {
   box-sizing: border-box;
-  background-color: #354148;
+  background: url('../img/stardust.png') repeat;
   color: #FDFEFE;
   font-weight: bolder;
   font-size: 30px;
@@ -150,7 +150,7 @@ h4 {
 #trashTagInput {
   display: inline-block;
   min-width: 210px;
-  margin: 10px 0 0 20px;
+  margin: 10px 0 0 10px;
   padding: 0;
   padding-left: 15px;
   color: #02080D;
@@ -208,7 +208,7 @@ h4 {
 }
 .committedTags {
   font-size: 20px;
-  background-color: cyan;
+  background-color: yellow;
   color: #00080E;
   margin-right: 15px;
   display: inline-block;
@@ -247,4 +247,18 @@ h4 {
 .stats {
   font-size: 20px;
   line-height:40px;
+}
+#submitButton {
+  transition: .5s ease all;
+  background-color: cyan;
+}
+#submitButton:hover {
+  background-color: yellow;
+}
+.ionHover {
+  transition: .5s ease all;
+  color: cyan;
+}
+.ionHover:hover {
+  color: yellow;
 }
