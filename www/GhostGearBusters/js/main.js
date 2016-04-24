@@ -2,51 +2,53 @@ var map, toc, _currentMediaMode, _mapVisibleXS;
 require([
 "esri/map", "esri/dijit/HomeButton", "esri/dijit/Scalebar", "application/bootstrapmap", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/layers/FeatureLayer", "esri/dijit/Popup", "esri/dijit/PopupTemplate", "esri/renderers/SimpleRenderer", "esri/renderers/UniqueValueRenderer", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/Color", "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphic", "dijit/TooltipDialog", "dijit/popup", "esri/lang", "dojo/dom-style", "esri/symbols/PictureMarkerSymbol", "dojo/dom-construct", "dojo/domReady!"],
   function( Map,  HomeButton,  Scalebar,  BootstrapMap,  ArcGISDynamicMapServiceLayer,  FeatureLayer,  Popup,  PopupTemplate, SimpleRenderer,  UniqueValueRenderer,  SimpleFillSymbol,  SimpleLineSymbol,  Color,  Query,  QueryTask,  Graphic,  TooltipDialog,  dijitPopup,  esriLang,  domStyle,  PictureMarkerSymbol,  domConstruct) {
-	
+
 	// Get a reference to the ArcGIS Map class
 	var map = BootstrapMap.create("map", {
-	  basemap: "gray",
-	  center: [-79.970, 32.821],
-	  zoom: 11,
-	  scrollWheelZoom: true,
+    options: {
+      basemap: "gray",
+      center: [-79.970, 32.821],
+      zoom: 11,
+      scrollWheelZoom: true  
+    }
 	});
-		
+
 	var home = new HomeButton({
         map: map
       }, "HomeButton");
       home.startup();
-	
+
 	 $('#HomeButton').on('click', function() {
 		if (featureLayerWarnings.visible == true){
 			featureLayerWarnings.hide();
 		}
 		$('#warnBtn').removeClass("active");
-		
+
 		if (featureLayerPrecipitation.visible == true){
 			featureLayerPrecipitation.hide();
 		}
 		$('#precipBtn').removeClass("active");
-		
+
 		if (featureLayerWind.visible == true){
 			featureLayerWind.hide();
 		}
 		$('#windBtn').removeClass("active");
-		
+
 		if (featureLayerStorm.visible == true){
 			featureLayerStorm.hide();
 		}
 		$('#stormBtn').removeClass("active");
-	}); 
-	
+	});
+
 	var mapServiceURL = "http://tela.roktech.net/arcgis/rest/services/Demos/fishackathonGhostGearBusters/MapServer";
 	var gearURL = "http://tela.roktech.net/arcgis/rest/services/Demos/fishackathonGhostGearBusters/MapServer/0";
 	var warningsURL = "http://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/1";
 	var precipURL = "http://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer/4";
 	var windURL = "https://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_storm_reports/MapServer/2";
 	var stormURL = "https://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_storm_reports/MapServer/3";
-	
+
 	var dynamicMapService = new ArcGISDynamicMapServiceLayer(mapServiceURL);
-	
+
 	//create feature layers
 	var featureLayerGear = new FeatureLayer(gearURL,{
 		mode: FeatureLayer.MODE_AUTO,
@@ -73,7 +75,7 @@ require([
 	featureLayerPrecipitation.hide();
 	featureLayerWind.hide();
 	featureLayerStorm.hide();
-	
+
 	//add scalebar
 	var scalebar = new Scalebar({
 	  map: map,
@@ -102,26 +104,26 @@ require([
 			map.setBasemap("osm");
 			break;
 		}
-	  }); 
-	});	
-			
+	  });
+	});
+
 	//create picture image renderers for point data
 	var betaURL = "img/icons/";
 	var gImg = "ghost.png";
 	var wImg = "wind.png";
-	
+
 	var wSym = new PictureMarkerSymbol(betaURL+wImg,16,16);
 	var wRen = new SimpleRenderer(wSym);
-	featureLayerWind.setRenderer(wRen); 
-	
+	featureLayerWind.setRenderer(wRen);
+
 	var gSym = new PictureMarkerSymbol(betaURL+gImg,16,16);
 	var gRen = new SimpleRenderer(gSym);
 	featureLayerGear.setRenderer(gRen);
-	
-	
+
+
 	//Add mapLayers
 	map.addLayers( [dynamicMapService, featureLayerGear, featureLayerWarnings, featureLayerPrecipitation, featureLayerWind, featureLayerStorm] );
-	
+
 	//Control feature layers via "TOC" menu
 	$('#warnBtn').on('click', function() {
 		if (featureLayerWarnings.visible == true){
@@ -165,21 +167,21 @@ require([
 		else if (mapScale > 144447.638572){
 		dynamicMapService.setOpacity(1.0);
 		}
-	}	
-	
+	}
+
 	//map tips
 	dialog = new TooltipDialog({
 	  id: "tooltipDialog",
 	  style: "position: absolute; width: 240px; font: normal normal normal 10pt Helvetica;z-index:100"
 	});
     dialog.startup();
-	
+
 	var highlightSymbol = new SimpleFillSymbol(
-          SimpleFillSymbol.STYLE_SOLID, 
+          SimpleFillSymbol.STYLE_SOLID,
           new SimpleLineSymbol(
-            SimpleLineSymbol.STYLE_SOLID, 
+            SimpleLineSymbol.STYLE_SOLID,
             new Color([255,0,0]), 3
-          ), 
+          ),
           new Color([255,0,0,0])
         );
 
@@ -190,7 +192,7 @@ require([
 		map.on("extent-change", function(){
 			closeDialog();
 		});
-               
+
 	//listen for when the onMouseOver event fires on the graphics layer
 	//when fired, create a new graphic with the geometry from the event.graphic and add it to the maps graphics layer
 	featureLayerWarnings.on("click", function(evt){
@@ -200,12 +202,12 @@ require([
 	  var highlightGraphic = new Graphic(evt.graphic.geometry,highlightSymbol);
 	  map.graphics.add(highlightGraphic);
 	  map.setMapCursor("pointer");
-	  
+
 	  dialog.setContent(content);
 
 	  domStyle.set(dialog.domNode, "opacity", 0.85);
 	  dijitPopup.open({
-		popup: dialog, 
+		popup: dialog,
 		x: evt.pageX,
 		y: evt.pageY
 	  });
@@ -217,12 +219,12 @@ require([
 	  var highlightGraphic = new Graphic(evt.graphic.geometry,highlightSymbol);
 	  map.graphics.add(highlightGraphic);
 	  map.setMapCursor("pointer");
-	  
+
 	  dialog.setContent(content);
 
 	  domStyle.set(dialog.domNode, "opacity", 0.85);
 	  dijitPopup.open({
-		popup: dialog, 
+		popup: dialog,
 		x: evt.pageX,
 		y: evt.pageY
 	  });
@@ -234,12 +236,12 @@ require([
 	  var highlightGraphic = new Graphic(evt.graphic.geometry,highlightSymbol);
 	  map.graphics.add(highlightGraphic);
 	  map.setMapCursor("pointer");
-	  
+
 	  dialog.setContent(content);
 
 	  domStyle.set(dialog.domNode, "opacity", 0.85);
 	  dijitPopup.open({
-		popup: dialog, 
+		popup: dialog,
 		x: evt.pageX,
 		y: evt.pageY
 	  });
@@ -248,5 +250,5 @@ require([
 		dijitPopup.close(dialog);
 		map.setMapCursor("default");
 	}
-		
+
 });

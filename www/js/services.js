@@ -1,6 +1,24 @@
 angular.module('app.services', [])
 
+.factory('dojoLoader', function ($q) {
 
+           return {
+               getClass: function (name) {
+                   var deferred = $q.defer();
+                   if (angular.isString(name)) {
+                       require([name], function (obj) {
+                           deferred.resolve(obj);
+                       });
+                   }
+                   else if (angular.isArray(name)) {
+                       require(name, function (obj) {
+                           deferred.resolve(arguments);
+                       });
+                   }
+                   return deferred.promise;
+               }
+           }
+       })
 
 .factory('geoLocationService', ['$q', '$http', function($q, $http){
 

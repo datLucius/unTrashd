@@ -1,10 +1,21 @@
 <ion-view title="Map Default Page" id="page5">
   <ion-header></ion-header>
     <ion-content padding="true" class="has-header">
+    <!--   <esri-map id="map" map-options="map.options">
+    </esri-map> -->
+
+      <esri-map id="map" webmap-id="5ad5ac16d9c34b4c8717f86847f486c5" center="map.center" zoom="map.zoom" item-info="itemInfo" map="map">
+<!--                 <esri-feature-layer
 
 
-      <esri-scene-view map="map" view-options="{scale: 50000000, center: [-101.17, 21.78]}">this should be a map
-        </esri-scene-view>
+
+ url="http://tela.roktech.net/arcgis/rest/services/Demos/fishackathonGhostGearBusters/MapServer/0"></esri-feature-layer> -->
+                  <!-- <esri-feature-layer url="//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer> -->
+              </esri-map>
+              <p>Lat: {{ $scope.center.lat | number:3 }}, Lng: {{ $scope.center.lng | number:3 }}, Zoom: {{ $scope.zoom }}</p>
+
+      <!-- <esri-scene-view map="map" view-options="{scale: 50000000, center: [-101.17, 21.78]}">this should be a map
+        </esri-scene-view> -->
         <!-- <div style="margin: 0px; line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
         </div> -->

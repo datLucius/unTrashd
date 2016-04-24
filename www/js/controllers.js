@@ -98,12 +98,14 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('mapDefaultPageCtrl', function($scope) {
-      // $scope.$on('$viewContentLoaded', function () {
-      //   var mapElement = document.getElementById('map')
-      //   mapElement.innerHTML = $scope.map
-      // })
-      // $scope.map =
+.controller('mapDefaultPageCtrl', function($scope, esriLoader) {
+  $scope.map = {
+    center: {
+      lng: -80,
+      lat: 33
+    },
+    zoom: 11
+  }
 
 })
 
