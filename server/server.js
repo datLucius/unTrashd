@@ -123,14 +123,15 @@ MongoClient.connect(MONGO_URL, function(err, db) {
                     var most = 0;
                     var last_tag = user.joined;
                     items.forEach(function(item) {
-                        console.log(item);
-                        item.tags.forEach(function(tag) {
-                            tags[tag] = (tags[tag] || 0) + 1;
-                            if (tags[tag] > most) {
-                                most = tags[tag];
-                                highestTag = tag;
-                            }
-                        });
+                        if (item.tags) {
+                            item.tags.forEach(function(tag) {
+                                tags[tag] = (tags[tag] || 0) + 1;
+                                if (tags[tag] > most) {
+                                    most = tags[tag];
+                                    highestTag = tag;
+                                }
+                            });
+                        }
                         if (item.tagged_on > last_tag) last_tag = item.tagged_on;
                         dates[new Date(item.tagged_on).toDateString()] = true;
                     });
