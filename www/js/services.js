@@ -61,7 +61,7 @@ angular.module('app.services', [])
                   navigator.geolocation.getCurrentPosition(function(position){
 
                       var result = {latitude : position.coords.latitude , longitude : position.coords.longitude}
-                      console.log(result);
+                      defer.resolve(result);
 
                     }, function(error){
 

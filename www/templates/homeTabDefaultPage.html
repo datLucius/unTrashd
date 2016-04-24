@@ -11,25 +11,25 @@
 </div>
    </ion-header-bar>
   <div id="feedContainer">
-    <div class="instaTrash" ng-show="show['all']" ng-repeat="trashPost in allTrashPosts">
+    <div class="instaTrash" ng-show="show['all']" ng-repeat="trashPost in allRecent">
       <div class="userInfoRow">
-        <div class="userName">{{thrashPost.userName}}</div>
-        <div class="trashDate">{{trashPost.date | date: MM/dd}}</div>
-      </div>
-      <div class="trashImage" data-ng-src="trashPost.imageURI"></div>
-      <div class="feedTrashTagsBox">
-        <div style="margin-left:10px;">Tags</div>
-        <div class="feedTrashTag" ng-repeat="trashTag in trashPost.trashTags">{{trashTag.name}}</div>
-      </div>
-    </div>
-    <div ng-hide="show['all']" ng-repeat="trashPost in myTrashPosts">
-      <div class="userInfoRow">
-        <div class="userName">{{thrashPost.userName}}</div>
-        <div class="trashDate">{{trashPost.date | date: MM/dd}}</div>
+        <div class="userName">{{thrashPost.tagged_by}}</div>
+        <div class="trashDate">{{trashPost.tagged_on | date: MM/dd}}</div>
       </div>
       <div class="trashImage" data-ng-src="trashPost.image"></div>
       <div class="feedTrashTagsBox">
-        <div class="feedTrashTag" ng-repeat="trashTag in trashPost.trashTags">{{trashTag.name}}</div>
+        <div style="margin-left:10px;">Tags</div>
+        <div class="feedTrashTag" ng-repeat="trashTag in trashPost.tags">{{trashTag}}</div>
+      </div>
+    </div>
+    <div ng-hide="show['all']" ng-repeat="trashPost in myRecent">
+      <div class="userInfoRow">
+        <div class="userName">{{thrashPost.tagged_by}}</div>
+        <div class="trashDate">{{trashPost.tagged_on | date: MM/dd}}</div>
+      </div>
+      <div class="trashImage" data-ng-src="trashPost.image"></div>
+      <div class="feedTrashTagsBox">
+        <div class="feedTrashTag" ng-repeat="trashTag in trashPost.tags">{{trashTag}}</div>
       </div>
     </div>
   </div>

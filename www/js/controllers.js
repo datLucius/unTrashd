@@ -4,11 +4,9 @@ angular.module('app.controllers', [])
   $scope.user = localStorage.getItem('user')
   $scope.allGrab = gearService.recent().then(function (res) {
     $scope.allRecent = res.data
-    console.log('all Rec', $scope.allRecent)
   })
   $scope.myGrab = gearService.recent($scope.user).then(function (res) {
     $scope.myRecent = res.data
-    console.log('my Rec', $scope.myRecent)
   })
   $scope.show = {
     'all': true
@@ -27,24 +25,23 @@ angular.module('app.controllers', [])
 
 .controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService, gearService) {
   $scope.user = localStorage.getItem('user')
-  $scope.trash = {
-    location: $scope.trashLocation,
-    image: $scope.trashImage,
-    tags: $scope.allTags,
-    tagged_by: $scope.user
-  }
-  $scope.postNewFind = function(){ gearService.post($scope.trash) }
   $scope.allTags = []
   $scope.trashImage
   $scope.trashTag = {
     trashLabel: ''
   }
+  $scope.currentLocation
   $scope.show = {
     'tagAdd': true
   }
   $scope.showType = {
     'icon': true
   }
+  // $scope.myLocationGrab = geoLocationService.getLocation().then(function (res) {
+  //   console.log(res)
+  //   $scope.currentLocation = [res.latitude, res.longitude]
+  //   console.log('my local', $scope.currentLocation)
+  // })
   $scope.suggestions = [{trashLabel: 'rope'}, {trashLabel: 'web'}, {trashLabel: 'metal'}, {trashLabel: 'net'},  {trashLabel: 'gear'}]
   $scope.commonChoices = [{trashLabel: 'can', imageSrc: ''}]
   $scope.enterTag = function(keyEvent) {
@@ -53,14 +50,14 @@ angular.module('app.controllers', [])
     }
   }
   $scope.addTag = function () {
-    $scope.allTags.push($scope.trashTag)
+    $scope.allTags.push($scope.trashTag.trashLabel)
     $scope.trashTag = {
       trashLabel: ''
     }
     console.log($scope.allTags)
   }
   $scope.addSuggestion = function (suggestionTag) {
-    $scope.allTags.push(suggestionTag)
+    $scope.allTags.push(suggestionTag.trashLabel)
 
   }
   $scope.addChoice = function (commonChoice) {
@@ -77,11 +74,10 @@ angular.module('app.controllers', [])
   }
   $scope.$on('$ionicView.enter', function() {
 
-geoLocationService.getLocation().then(function(result){
-         $scope.currentLocation = result
-         console.log($scope.currentLocation)
-       })
-})
+    $scope.myLocationGrab = geoLocationService.getLocation().then(function (res) {
+      $scope.currentLocation = [res.latitude, res.longitude]
+    })
+  })
 $scope.form = {};
 
   // Initialize the database.
@@ -145,7 +141,15 @@ $scope.takePhoto = function () {
              // An error occured. Show a message to the user
          });
      }
-
+     $scope.postNewFind = function() {
+       var trash = {
+         location: $scope.currentLocation,
+         image: $scope.imgURI,
+         tags: $scope.allTags,
+         tagged_by: $scope.user
+       }
+       gearService.post(trash)
+     }
 })
 
 .controller('statsTabDefaultPageCtrl', function($scope, userService) {
@@ -156,7 +160,7 @@ $scope.takePhoto = function () {
   }
   $scope.fullUser = userService.get($scope.user).then(function (res) {
     $scope.userData = res.data
-    console.log($scope.userData)
+    console.log('this is user', $scope.userData)
   })
   $scope.leaderGrab = userService.leaderboard().then(function (res) {
     $scope.leaderBoard = res.data

@@ -30,14 +30,14 @@
             <div id="iconType" ng-click="showType['icon'] = true">type</div>
             <div id="tagType" ng-click="showType['icon'] = false">tag</div>
           </div> -->
-          <div id="commonIconGrid" ng-show="showType['icon'] = true">
+          <!-- <div id="commonIconGrid" ng-show="showType['icon'] = true">
             <div class="commonIconCell" ng-repeat="commonChoice in commonChoices" ng-click="addChoice(commonChoice)">
               <img class="commonIcon" ng-src="common.imgSrc" ng-click="addChoice(commonChoice)"></img>
             </div>
-          </div>
+          </div> -->
           <div id="tagUpdateBox">
             <div ng-if="allTags" ng-repeat="committedTag in allTags" class="committedTags" style="margin:10px;float:left;" ng-click="removeTag(committedTag)">
-              <div class="tagName" style="display:inline-block; margin-right: 10px;" ng-click="removeTag(committedTag)">{{committedTag.trashLabel}}</div>
+              <div class="tagName" style="display:inline-block; margin-right: 10px;" ng-click="removeTag(committedTag)">{{committedTag}}</div>
               <div class="removeX" ng-click="removeTag(committedTag)" style="display:inline-block">X</div>
             </div>
             <input type="text" ng-model="trashTag.trashLabel" id="trashTagInput" placeholder="add tags (ex: metal, can, net)" style="float:left;" ng-keydown="$event.which === 13 && addTag()"></input>
@@ -49,6 +49,7 @@
               </div>
             </div>
         </div>
+          <div ng-click="postNewFind()" style="text-decoration: none;display:block;"><div class="suggestionBubble" style="text-align:center;height: 50px;width:100%;">Submit</div></div>
       </form>
   </ion-content>
 </ion-view>
