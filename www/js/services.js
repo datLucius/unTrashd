@@ -26,10 +26,10 @@ angular.module('app.services', [])
 .factory('userService', function($http) {
     return {
         get: function(id) {
-            return $http.get('/users/'+id);
+            return $http.get(API_URL+'/users/'+id);
         },
         leaderboard: function() {
-            return $http.get('/leaderboard');
+            return $http.get(API_URL+'/leaderboard');
         }
     }
 })
@@ -37,14 +37,14 @@ angular.module('app.services', [])
 .factory('gearService', function($http) {
     return {
         get: function(id) {
-            return $http.get('/gear/'+id);
+            return $http.get(API_URL+'/gear/'+id);
         },
         recent: function(id) {
-            if (id) return $http.get('/recent?user_name='+id);
-            else return $http.get('/recent');
+            if (id) return $http.get(API_URL+'/recent?user_name='+id);
+            else return $http.get(API_URL+'/recent');
         },
         post: function(data) {
-            return $http.post('/gear', data)
+            return $http.post(API_URL+'/gear', data)
         }
     }
 })
