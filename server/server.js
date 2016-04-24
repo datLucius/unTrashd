@@ -226,7 +226,13 @@ MongoClient.connect(MONGO_URL, function(err, db) {
     });
 
     app.get('/recent', function(req, res) {
-        gear.find().sort({tagged_on: -1}).limit(10).toArray()
+        var query = {};
+        if (req.query.user_name) {
+            query = {
+                tagged_by: req.query.user_name
+            }
+        }
+        gear.find(query).sort({tagged_on: -1}).limit(10).toArray()
             .then(function(gear) {
                 if (gear) {
                     res.send(gear);
