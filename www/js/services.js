@@ -1,4 +1,4 @@
-var API_URL = "http://10.15.157.140:3001";
+var API_URL = "https://desolate-stream-92288.herokuapp.com";
 
 angular.module('app.services', [])
 
