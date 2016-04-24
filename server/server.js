@@ -7,6 +7,7 @@ var request = require('superagent');
 var Promise = require('bluebird');
 var badges = require('./badges');
 var _ = require('lodash');
+var cors = require('cors');
 
 var MONGO_URL = 'mongodb://localhost:27017/untrashd';
 var GIS_URL = "http://tela.roktech.net/arcgis/rest/services/Demos/fishackathonGhostGearBusters/FeatureServer/0/applyEdits";
@@ -76,6 +77,7 @@ MongoClient.connect(MONGO_URL, function(err, db) {
         tags = db.collection('tags');
 
     var app = express();
+    app.use(cors());
 
     var updateBadges = function(gear) {
         return new Promise(function(resolve, reject) {
