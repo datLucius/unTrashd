@@ -60,6 +60,13 @@ function getLevel(points) {
     if (points > -1) { return "SCRUB" };
 }
 
+function getPoints(gear) {
+    var points = 0;
+    if (gear.image) points += 5;
+    points += gear.tags.length;
+    return points;
+}
+
 MongoClient.connect(MONGO_URL, function(err, db) {
     assert.equal(null, err);
     console.log("Connected to mongoDb");
@@ -71,7 +78,31 @@ MongoClient.connect(MONGO_URL, function(err, db) {
     var app = express();
 
     var updateBadges = function(gear) {
-        return gear;
+        return new Promise(function(resolve, reject) {
+            users.findOne({_id: gear.tagged_by}).then(function(user) {
+                var newBadges = _.unionBy([user.badges, badges], function(badge) {
+                    return badge.id;
+                });
+                var points = getPoints(gear);
+                users.updateOne({_id: gear.tagged_by}, {
+                    $set: {
+                        badges: newBadges,
+                        points: user.points + points
+                    }
+                })
+                .then(function() {resolve(gear);})
+                .catch(function(err) {
+                    console.log(err);
+                    res.sendStatus(500);
+                    reject(err);
+                });
+            }).catch(function(err) {
+                console.log(err);
+                res.sendStatus(500);
+                reject(err);
+            });
+
+        });
     }
 
     //count, days since last tag, number of days with items, most common tag, level, rank
