@@ -1,4 +1,4 @@
-var API_URL = "http://localhost:3001";
+var API_URL = "http://10.15.157.140:3001";
 
 angular.module('app.services', [])
 
