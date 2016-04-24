@@ -17,7 +17,7 @@ angular.module('app.controllers', [])
   console.log($scope.allTrashPosts)
 })
 
-.controller('inputTabDefaultPageCtrl', function($scope) {
+.controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService) {
   $scope.trash = {
     points: $scope.points,
     location: $scope.trashLocation,
@@ -143,14 +143,21 @@ $scope.takePhoto = function () {
   $scope.allStats
 })
 
-.controller('mapDefaultPageCtrl', function($scope, esriLoader) {
-  $scope.map = {
-    center: {
-      lng: -80,
-      lat: 33
-    },
-    zoom: 11
-  }
+.controller('mapDefaultPageCtrl', function($scope) {
+
+  $scope.$on('$ionicView.enter', function() {
+
+  $('#mapClick').click();
+  })
+// .controller('mapDefaultPageCtrl', function($scope, esriLoader) {
+  // $scope.map = {
+  //   center: {
+  //     lng: -80,
+  //     lat: 33
+  //   },
+  //   zoom: 11
+  // }
+
 })
 
 .controller('loginCtrl', function($scope) {
