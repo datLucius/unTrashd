@@ -333,7 +333,7 @@ MongoClient.connect(MONGO_URL, function(err, db) {
             });
     });
 
-    var server = app.listen(3000, function(err) {
+    var server = app.listen(3001, function(err) {
         assert.equal(null, err);
         console.log('Listening at http://localhost:3000');
     });

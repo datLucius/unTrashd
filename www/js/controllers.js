@@ -138,11 +138,17 @@ $scope.takePhoto = function () {
 
 })
 
-.controller('statsTabDefaultPageCtrl', function($scope) {
+.controller('statsTabDefaultPageCtrl', function($scope, userService) {
+  $scope.user = localStorage.getItem('user')
+  console.log($scope.user)
   $scope.view = {
     'myStats': true
   }
-  $scope.myStats
+  $scope.fullUser = userService.get($scope.user).then(function (res) {
+    $scope.userData = res.data
+    console.log($scope.userData)
+  })
+  $scope.points = $scope.fullUser.points
   $scope.allStats
 })
 
@@ -163,7 +169,7 @@ $scope.takePhoto = function () {
 
 })
 
-.controller('loginCtrl', function($scope) {
+.controller('loginCtrl', function($scope, $state) {
   $scope.login = function (acct) {
     $scope.user = acct.userid;
     localStorage.setItem("user", acct.userid);
