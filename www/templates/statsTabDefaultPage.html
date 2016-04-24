@@ -11,9 +11,11 @@
 </div>
    </ion-header-bar>
    <ion-content class="has-header" style="margin-top: 50px; ">
-     <div class="myStats" ng-show="view['myStats']">
-        <h4 class="cyan">My stats</h4>
-        <div ng-repeat="myStat in myStats"></div>
+     <div class="myStats" ng-show="view['myStats']" style="padding:20px;">
+        <h4 class="cyan stats" style="font-size:30px;font-weight:bolder;">MY STATS</h4>
+        <div class="cyan stats">points: {{points || 45}}</div>
+        <div class="cyan stats">longest streak: {{streak || 4}} days</div>
+        <div class="cyan stats">points: {{points}}</div>
      </div>
      <div class="allStats" ng-hide="view['myStats']">
         <h4 class="cyan">All stats</h4>

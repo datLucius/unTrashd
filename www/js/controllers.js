@@ -154,10 +154,10 @@ $scope.takePhoto = function () {
 
 .controller('statsTabDefaultPageCtrl', function($scope, userService) {
   $scope.user = localStorage.getItem('user')
-  console.log($scope.user)
   $scope.view = {
     'myStats': true
   }
+  $scope.userData
   $scope.fullUser = userService.get($scope.user).then(function (res) {
     $scope.userData = res.data
     console.log('this is user', $scope.userData)
