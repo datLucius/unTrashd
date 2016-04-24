@@ -1,0 +1,24 @@
+{
+  "name": "untrashd",
+  "version": "1.0.0",
+  "description": "API for untrashd",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/datLucius/unTrashd.git"
+  },
+  "author": "John Nelson",
+  "license": "CC0-1.0",
+  "homepage": "https://github.com/datlucius/untrashd",
+  "dependencies": {
+    "assert": "^1.3.0",
+    "bluebird": "^3.3.5",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.3",
+    "lodash": "^4.11.1",
+    "mongodb": "^2.1.16",
+    "superagent": "^1.8.3"
+  }
+}
