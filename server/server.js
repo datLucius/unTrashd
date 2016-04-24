@@ -12,6 +12,7 @@ var cors = require('cors');
 // var MONGO_URL = 'mongodb://localhost:27017/untrashd';
 var MONGO_URL = 'mongodb://untrashd:test123@ds015508.mlab.com:15508/untrashd'
 var GIS_URL = "http://tela.roktech.net/arcgis/rest/services/Demos/fishackathonGhostGearBusters/FeatureServer/0/applyEdits";
+var port = process.env.PORT || 3001;
 
 function addFeature(gear) {
     var adds = [{
@@ -335,9 +336,9 @@ MongoClient.connect(MONGO_URL, function(err, db) {
             });
     });
 
-    var server = app.listen(3001, function(err) {
+    var server = app.listen(port, function(err) {
         assert.equal(null, err);
-        console.log('Listening at http://localhost:3000');
+        console.log('Listening at http://localhost:'+port);
     });
 
     process.on('SIGINT', function() {
