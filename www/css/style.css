@@ -1,3 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+h1{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+div {
+  font-family: 'Roboto', sans-serif;
+}
+.instaTrash {
+  border-radius: 3px;
+  background-color: white;
+  width: 480px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.userInfoRow {
+  width: 100%;
+  background-color: white;
+  display: flex;
+}
+.userName {
+  align-self: flex-start;
+  color: black;
+}
+.trashDate {
+  align-self: flex-end;
+  color: black;
+}
+.trashImage {
+  width: 480px;
+  height: 480px;
+  background-color: black;
+  margin: 0 auto;
+  display: block;
+}
+.feedTrashTagsBox {
+  width: 100%;
+  min-height: 50px;
+}
+.feedTrashTag {
+  margin: 10px;
+  display: inline-block;
+}
+#feedContainer {
+  padding:20px;
+  margin-top: 80px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
+  left: 0;
+  right: 0;
+  font-family: 'Roboto', sans-serif;
+}
+ion-view {
+  background-color: black;
+}
+.pane {
+  background: url('../img/waves.png') repeat;
+}
+h4 {
+  color: cyan;
+}
+.cyan {
+  color: cyan;
+}
+.dark {
+  background-color: #00080E;
+}
+.blueBorder {
+  background-color: #64F2F7;
+  color: black;
+}
+.map {
+  height: 100vh;
+}
 .fancy-line {
     border-bottom:1px solid rgba(136,136,136,0.75);
     position:relative;
@@ -12,4 +92,139 @@
 
 .trash-icon, .save-icon {
   display: inline-block;
+}
+
+/* HOME STYLES */
+
+.userInfoRow {
+  line-height: 30px;
+  padding-left: 15px;
+}
+.userName {
+  float: left;
+}
+.trashDate {
+  float: right;
+}
+.noBorder {
+  transition: .5s ease all;
+  background-color: rgba(100,242,247, 0);
+}
+.noBorder:hover {
+  opacity: 1;
+  background-color: rgba(100,242,247, 1);
+  color: black;
+}
+.unTrashedHeader {
+  box-sizing: border-box;
+  background-color: #354148;
+  color: #FDFEFE;
+  font-weight: bolder;
+  font-size: 30px;
+  font-family: 'Passion One', cursive;
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.3);
+  z-index:3;
+  letter-spacing: 0.25em;
+}
+/* INPUT STYLES */
+#inputForm {
+  margin: 0;
+  padding: 20px;
+}
+#inputTitle {
+
+}
+#pointDisplay {
+
+}
+#tagAddBox {
+
+}
+#tagInputRow {
+  line-height: 30px;
+  width: 100%;
+}
+#trashTagInput {
+  display: inline-block;
+  min-width: 210px;
+  margin: 10px 0 0 20px;
+  padding: 0;
+  padding-left: 15px;
+  color: #02080D;
+  height: 45px;
+  float: left;
+}
+#addTagButton {
+  background-color: #0FE7F5;
+  width: 15%;
+  height: 45px;
+  display: inline-block;
+  margin: 0;
+  float: left;
+}
+#confirmTagsButton {
+  background-color: #00080E;
+  width: 15%;
+  height: 45px;
+  display: inline-block;
+  margin: 0;
+  float: left;
+}
+#suggestionBox {
+  margin-bottom: 15px;
+}
+#locationSwitch {
+  width: 100%;
+}
+#locationCustom {
+  width: 50%;
+  text-align: center;
+  display:inline-block;
+  float:left;
+  background-color: #00080E;
+  color: white;
+  line-height: 50px;
+}
+#locationUseCurrent {
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+  float:left;
+  background-color: #0FE7F5;
+  color: #00080E;
+  line-height: 50px;
+}
+.suggestionBubble {
+  font-size: 12px;
+  background-color: cyan;
+  color: #1D1313;
+  margin: 10px 10px 10px 0px;
+  display: inline-block;
+  padding: 10px 20px 10px 20px;
+  font-size: 20px;
+}
+.committedTags {
+  font-size: 20px;
+  background-color: cyan;
+  color: #00080E;
+  margin-right: 15px;
+  display: inline-block;
+  line-height: 45px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.tagName {
+  color: #00080E;
+}
+.removeX {
+  color: #00080E;
+}
+.addMoreTagsButton {
+  font-size: 12px;
+  background-color: #00080E;
+  margin-right: 15px;
+  display: inline-block;
+  padding: 10px 20px 10px 20px;
 }

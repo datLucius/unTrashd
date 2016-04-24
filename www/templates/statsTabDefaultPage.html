@@ -1,26 +1,23 @@
 <ion-view hide-nav-bar="true">
-  <ion-header-bar class="bar-light" style="height: 75px">
-<div style="width: 100%; position: absolute; left: 0px">
-  <a ui-sref="tabsController.statsTabDefaultPage"><div style="width: 49%; margin-top: 50px; color: black; display: inline-block; text-align: center">
-<div>ALL</div>
-<div class="upperTabLine"style=""></div>
-</div></a>
-<a ui-sref="tabsController.myStats">
-<div style="width: 49%; margin-top: 50px; color: black; display: inline-block; text-align: center">
-<div>ME</div>
-</div></a>
-
-
-
+  <ion-header-bar class="bar-clear" style="height: 75px; padding:0;">
+<div style="width: 100%; height: 50px; line-height: 50px;position: absolute; left: 0px;margin-top:0;text-align:center;" ui-sref="tabsController.homeTabDefaultPage" class="unTrashedHeader">unTrashd</div>
+<div style="width: 100%; line-height: 30px; position: absolute; left: 0px; color: cyan;margin-top:50px;">
+<div ng-click="view['myStats'] = false" style="display:inline-block;float:left; text-align:center;width:50%;" ng-class="view['myStats'] ? 'noBorder' : 'blueBorder'">
+    <div ng-click="view['myStats'] = false">ALL</div>
+</div>
+<div ng-click="view['myStats'] = true" style="display:inline-block; text-align:center;width:50%;" ng-class="view['myStats'] ? 'blueBorder' : 'noBorder'">
+    <div ng-click="view['myStats'] = true">ME</div>
+</div>
 </div>
    </ion-header-bar>
-   <ion-content padding="true" class="has-header" style="margin-top: 40px">
-
-        <h1 id="homeTabDefaultPage-heading1" style="color:#000000;text-align:center;">Leaderboard</h1>
-        <ion-list>
-            <ion-item>Item 1</ion-item>
-            <ion-item>Item 2</ion-item>
-            <ion-item>Item 3</ion-item>
-        </ion-list>
+   <ion-content class="has-header" style="margin-top: 50px; ">
+     <div class="myStats" ng-show="view['myStats']">
+        <h4 class="cyan">My stats</h4>
+        <div ng-repeat="myStat in myStats"></div>
+     </div>
+     <div class="allStats" ng-hide="view['myStats']">
+        <h4 class="cyan">All stats</h4>
+        <div ng-repeat="allStat in allStats"></div>
+     </div>
     </ion-content>
 </ion-view>
