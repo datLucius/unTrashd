@@ -16,7 +16,7 @@
         <div style="display:inline-block;margin-right:20px;float:left;font-weight:bolder">{{trashPost.tagged_by}}</div>
         <div style="display:inline-block;">{{trashPost.tagged_on | date: MM/dd}}</div>
       </div>
-      <div class="trashImage" data-ng-src="trashPost.image"></div>
+      <img class="trashImage" data-ng-src="{{trashPost.image}}"></img>
       <div class="feedTrashTagsBox">
         <div style="margin-left:10px;font-weight:bolder;margin-top:10px;">Tags:</div>
         <div class="feedTrashTag" ng-repeat="trashTag in trashPost.tags">{{trashTag}}</div>
