@@ -1,8 +1,9 @@
 <ion-view id="tagPage" hide-nav-bar="true">
   <ion-header-bar class="bar-clear" style="height: 75px; padding:0;">
-<div style="width: 100%; height: 50px; line-height: 50px;position: absolute; left: 0px; margin-top:0;text-align:center;" ui-sref="tabsController.homeTabDefaultPage" class="unTrashedHeader">unTrashd</div>
+ <div style="width: 100%; height: 50px; line-height: 50px;position: absolute; left: 0px; margin-top:0;text-align:center;" class="unTrashedHeader">unTrashd</div>
 <div style="width: 100%; line-height: 30px; position: absolute; left: 0px;background-color: black; color: cyan;margin-top:52px;">
 </div>
+ <!-- <a ng-click="saveAsset()" style="float: right; text-decoration: none"><div class="ion-android-done glass-icon" style="font-size:35px; margin-right: 5px"></div> </a> -->
    </ion-header-bar>
    <ion-content overflow-scroll="true" padding="true" class="has-header">
      <h3 class="cyan" style="width:100%;text-align:center;margin-top:20px;">New Find</h3>
@@ -25,8 +26,8 @@
               </div>
             </div>
           </div>
+          <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
         </div>
-        <img ng-show="imgURI !== undefined" ng-src="{{imgURL}}" style="text-align: center">
         <br>
         <br>
           <div id="tagUpdateBox">
@@ -47,7 +48,10 @@
             <div style="color:cyan">{{currentLocation[0]}}</div>
             <div style="color:cyan">{{currentLocation[1]}}</div>
           </div>
-        </div>
+          <br>
+          <br>
+          <br>
+          <a ng-click="postNewFind()" style="text-decoration: none"><div class="suggestionBubble" style="display: flex; justify-content: center">Submit</div></a>
       </form>
   </ion-content>
 </ion-view>

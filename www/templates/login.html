@@ -1,19 +1,45 @@
-<ion-view title="Login" id="page6">
-    <ion-content padding="true" class="has-header">
-        <form class="list">
-            <ion-list>
-                <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="password" placeholder="">
-                </label>
-            </ion-list>
-            <div class="spacer" style="height: 40px;"></div>
-            <button id="login-button1" class="button button-stable  button-block">Log in</button>
-            <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+<ion-view hide-nav-bar="true" view-title="Signin" name="signin">
+  <ion-header-bar class="bar-clear" style="height: 75px; padding:0;">
+<div style="width: 100%; height: 50px; line-height: 50px;position: absolute; left: 0px; margin-top:0;text-align:center;" ui-sref="tabsController.homeTabDefaultPage" class="unTrashedHeader">unTrashd</div>
+<div style="width: 100%; line-height: 30px; position: absolute; left: 0px;background-color: black; color: cyan;margin-top:52px;">
+</div>
+   </ion-header-bar>
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+      <br>
+      <center>
+        <!-- <img src="img/CgXNYjPvQYCBtQA5Zuxa_fats_icon.png" width="20%" height="auto" style="width: 20%; height: auto;"> -->
+      </center>
+        <div>
+            <p>
+            </p>
+            <center>
+              unTrashd
+
+            </center>
+            <p></p>
+        </div>
+        <div class="spacer" style="width: 300px; height: 34px;"></div>
+        <div class="alert alert-error">{{error}}</div>
+        <form class="list" ng-submit="login(acct)">
+            <label class="item item-input" name="username">
+                <span class="input-label">User</span>
+                <input type="text" placeholder="" ng-model="acct.userid">
+            </label>
+            <label class="item item-input" name="password">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder="" ng-model="acct.password">
+            </label>
+
+            <button class="button button-stable button-block ">Sign In</button>
         </form>
+        <div>
+            <p>
+            </p>
+            <center>
+              <!--   www.commdirections.com
+               -->
+            </center>
+            <p></p>
+        </div>
     </ion-content>
 </ion-view>

@@ -17,13 +17,21 @@ angular.module('app.controllers', [])
   console.log($scope.allTrashPosts)
 })
 
-.controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService) {
+.controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService, gearService) {
   $scope.trash = {
     points: $scope.points,
     location: $scope.trashLocation,
     image: $scope.trashImage,
     trashTags: $scope.allTags
   }
+
+  $scope.postNewFind = function(){ gearService.post($scope.trash) }
+ $scope.allTags = []
+ $scope.trashImage
+ $scope.trashTag = {
+   trashLabel: ''
+ }
+
   $scope.allTags = []
   $scope.currentLocation = {
     0: 34234234234234,
@@ -69,6 +77,7 @@ geoLocationService.getLocation().then(function(result){
          $scope.location = result
        })
 })
+
 $scope.form = {};
 
   // Initialize the database.
@@ -83,8 +92,9 @@ $ionicPlatform.ready(function() {
    });
 });
 
-$scope.saveItem = function() {
-   itemService.addItem($scope.form);
+$scope.saveItem = function(suggestions) {
+  // itemService.addItem($scope.form);
+  console.log(suggestions);
 
 };
 
@@ -104,8 +114,8 @@ $scope.takePhoto = function () {
         $cordovaCamera.getPicture(options).then(function (imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
             //console.log("the photo", $scope.imgURI);
-            $scope.form.imgURI = $scope.imgURI;
-            console.log("form imgURI", $scope.form.imgURI);
+          //  $scope.form.imgURI = $scope.imgURI;
+          //  console.log("form imgURI", $scope.form.imgURI);
         }, function (err) {
             // An error occured. Show a message to the user
         });
@@ -160,7 +170,7 @@ $scope.takePhoto = function () {
 
 })
 
-.controller('loginCtrl', function($scope) {
+.controller('loginCtrl', function($scope, $state) {
   $scope.login = function (acct) {
     $scope.user = acct.userid;
     localStorage.setItem("user", acct.userid);
