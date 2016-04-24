@@ -1,6 +1,15 @@
 angular.module('app.controllers', [])
 
-.controller('homeTabDefaultPageCtrl', function($scope) {
+.controller('homeTabDefaultPageCtrl', function($scope, gearService) {
+  $scope.user = localStorage.getItem('user')
+  $scope.allGrab = gearService.recent().then(function (res) {
+    $scope.allRecent = res.data
+    console.log('all Rec', $scope.allRecent)
+  })
+  $scope.myGrab = gearService.recent($scope.user).then(function (res) {
+    $scope.myRecent = res.data
+    console.log('my Rec', $scope.myRecent)
+  })
   $scope.show = {
     'all': true
   }
@@ -14,16 +23,17 @@ angular.module('app.controllers', [])
     'date': 'May 4th',
     'trashTags': [{'name': 'wood'},{'name':'chair'}]
   }]
-  console.log($scope.allTrashPosts)
 })
 
-.controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService) {
+.controller('inputTabDefaultPageCtrl', function($scope, itemService, $cordovaCamera, $ionicPlatform, geoLocationService, gearService) {
+  $scope.user = localStorage.getItem('user')
   $scope.trash = {
-    points: $scope.points,
     location: $scope.trashLocation,
     image: $scope.trashImage,
-    trashTags: $scope.allTags
+    tags: $scope.allTags,
+    tagged_by: $scope.user
   }
+  $scope.postNewFind = function(){ gearService.post($scope.trash) }
   $scope.allTags = []
   $scope.trashImage
   $scope.trashTag = {
@@ -147,6 +157,9 @@ $scope.takePhoto = function () {
   $scope.fullUser = userService.get($scope.user).then(function (res) {
     $scope.userData = res.data
     console.log($scope.userData)
+  })
+  $scope.leaderGrab = userService.leaderboard().then(function (res) {
+    $scope.leaderBoard = res.data
   })
   $scope.points = $scope.fullUser.points
   $scope.allStats
