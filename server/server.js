@@ -225,8 +225,8 @@ MongoClient.connect(MONGO_URL, function(err, db) {
             });
     });
 
-    app.get('/gear/users/:id', function(req, res) {
-        gear.find({tagged_by: req.params.id}).toArray()
+    app.get('/recent', function(req, res) {
+        gear.find().sort({tagged_on: -1}).limit(10).toArray()
             .then(function(gear) {
                 if (gear) {
                     res.send(gear);
@@ -234,6 +234,9 @@ MongoClient.connect(MONGO_URL, function(err, db) {
                 else {
                     res.sendStatus(404);
                 }
+            }).catch(function(err) {
+                console.log(err);
+                res.sendStatus(500);
             });
     });
 
