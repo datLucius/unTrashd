@@ -15,25 +15,17 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
-
+    <script src="lib/pouchdb/dist/pouchdb.min.js"></script>
     <script src="//js.arcgis.com/3.16compact"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
 
     <script src="//npmcdn.com/angular-esri-map@1"></script>
-
-<!--  <script src="lib/angular-esri-map/dist/angular-esri-map.js"></script>
--->
-
-
-
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-<!--     <script src="lib/angular/angular.js"></script>
- -->    <script src="cordova.js"></script>
-
-    <script src="lib/pouchdb/dist/pouchdb.min.js"></script>
+    <!-- <script src="lib/angular/angular.js"></script> -->
+     <script src="cordova.js"></script>
 
 
-    <script defer src="lib/angular-ui/ui-bootstrap-tpls-0.2.0.min.js"></script>
+
+    <!-- <script defer src="lib/angular-ui/ui-bootstrap-tpls-0.2.0.min.js"></script> -->
 
 <!-- <script defer type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5compact"></script> -->
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -64,13 +56,13 @@
 
   </head>
   <body ng-app="app" animation="slide-left-right-ios7">
-  <div>
     <div>
-        <ion-nav-bar class="bar-stable">
-            <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
-        </ion-nav-bar>
-        <ion-nav-view></ion-nav-view>
+      <div>
+          <ion-nav-bar class="bar-stable">
+              <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
+          </ion-nav-bar>
+          <ion-nav-view></ion-nav-view>
+      </div>
     </div>
-</div>
   </body>
 </html>

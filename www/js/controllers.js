@@ -17,7 +17,7 @@ angular.module('app.controllers', [])
   console.log($scope.allTrashPosts)
 })
 
-.controller('inputTabDefaultPageCtrl', function($scope) {
+.controller('inputTabDefaultPageCtrl', function($scope, $ionicPlatform, $cordovaCamera, geoLocationService, itemService) {
   $scope.trash = {
     points: $scope.points,
     location: $scope.trashLocation,
@@ -25,10 +25,6 @@ angular.module('app.controllers', [])
     trashTags: $scope.allTags
   }
   $scope.allTags = []
-  $scope.currentLocation = {
-    0: 34234234234234,
-    1: 23423423423234
-  }
   $scope.trashImage
   $scope.trashTag = {
     trashLabel: ''
@@ -36,8 +32,11 @@ angular.module('app.controllers', [])
   $scope.show = {
     'tagAdd': true
   }
-  $scope.suggestions = [{trashLabel: 'rope'}, {trashLabel: 'web'}, {trashLabel: 'metal'}, {trashLabel: 'net'}]
-
+  $scope.showType = {
+    'icon': true
+  }
+  $scope.suggestions = [{trashLabel: 'rope'}, {trashLabel: 'web'}, {trashLabel: 'metal'}, {trashLabel: 'net'},  {trashLabel: 'gear'}]
+  $scope.commonChoices = [{trashLabel: 'can', imageSrc: ''}]
   $scope.enterTag = function(keyEvent) {
     if (keyEvent.which === 13) {
       $scope.addTag
@@ -54,6 +53,9 @@ angular.module('app.controllers', [])
     $scope.allTags.push(suggestionTag)
 
   }
+  $scope.addChoice = function (commonChoice) {
+    $scope.allTags.push(commonChoice)
+  }
   $scope.removeTag = function (committedTag) {
     var index = $scope.allTags.indexOf(committedTag);
     if(index >= 0) {
@@ -66,7 +68,8 @@ angular.module('app.controllers', [])
   $scope.$on('$ionicView.enter', function() {
 
 geoLocationService.getLocation().then(function(result){
-         $scope.location = result
+         $scope.currentLocation = result
+         console.log($scope.currentLocation)
        })
 })
 $scope.form = {};
@@ -110,7 +113,7 @@ $scope.takePhoto = function () {
             // An error occured. Show a message to the user
         });
         // console.log("the photo", imgURI);
-        // $scope.form.photo = $scope.imgURI;
+        $scope.form.photo = $scope.imgURI;
     }
 
     $scope.choosePhoto = function () {

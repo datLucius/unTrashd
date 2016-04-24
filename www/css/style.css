@@ -99,6 +99,7 @@ h4 {
 .userInfoRow {
   line-height: 30px;
   padding-left: 15px;
+  border-radius: 3px 3px 0 0;
 }
 .userName {
   float: left;
@@ -227,4 +228,19 @@ h4 {
   margin-right: 15px;
   display: inline-block;
   padding: 10px 20px 10px 20px;
+}
+.commonIconGrid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.commonIconCell {
+  padding: 20px;
+  border-radius: 3px;
+  border: 2px solid cyan;
+  margin: 20px;
+}
+.commonIcon {
+  width: 100px;
+  height: 100px;
 }

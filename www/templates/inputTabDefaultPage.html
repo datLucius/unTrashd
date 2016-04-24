@@ -9,26 +9,32 @@
       <form class="list">
         <div class="cameraRow">
           <div style="width:100%; display: flex; justify-content: center;">
-            <h4>Image</h4>
-          </div>
-          <div style="width:100%; display: flex; justify-content: center;">
             <div style="width: 70%; display:flex; align-content:space-between">
               <div class="cameraRight" style="width: 50%; display: flex; justify-content: center;">
               <a ng-click="takePhoto()" style="text-decoration: none;">
-                <div class="ion-ios-camera-outline cyan" style="font-size:55px; margin-right: 5px"></div>
+                <div class="ion-ios-camera-outline cyan" style="font-size:80px; margin-right: 5px"></div>
               </a>
               </div>
               <div class="cameraRight" style="width: 50%; display: flex; justify-content: center;">
               <a ng-click="choosePhoto()" style="text-decoration: none;">
-                <div class="ion-ios-upload-outline cyan" style="font-size:55px; margin-right: 5px"></div>
+                <div class="ion-ios-upload-outline cyan" style="font-size:70px; margin-right: 5px"></div>
               </a>
               </div>
             </div>
           </div>
         </div>
-        <img ng-show="imgURI !== undefined" ng-src="{{imgURL}}" style="text-align: center">
+        <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
         <br>
         <br>
+          <!-- <div id="typeSwitch">
+            <div id="iconType" ng-click="showType['icon'] = true">type</div>
+            <div id="tagType" ng-click="showType['icon'] = false">tag</div>
+          </div> -->
+          <div id="commonIconGrid" ng-show="showType['icon'] = true">
+            <div class="commonIconCell" ng-repeat="commonChoice in commonChoices" ng-click="addChoice(commonChoice)">
+              <img class="commonIcon" ng-src="common.imgSrc" ng-click="addChoice(commonChoice)"></img>
+            </div>
+          </div>
           <div id="tagUpdateBox">
             <div ng-if="allTags" ng-repeat="committedTag in allTags" class="committedTags" style="margin:10px;float:left;" ng-click="removeTag(committedTag)">
               <div class="tagName" style="display:inline-block; margin-right: 10px;" ng-click="removeTag(committedTag)">{{committedTag.trashLabel}}</div>
@@ -42,11 +48,6 @@
                   <div class="suggestionBubble" ng-repeat="suggestionTag in suggestions" ng-click="addSuggestion(suggestionTag)" style="float:left;">{{suggestionTag.trashLabel}}</div>
               </div>
             </div>
-          <div id="locationSwitch" style="text-align:center;display:block;float:left;">
-            <h4>Location</h4>
-            <div style="color:cyan">{{currentLocation[0]}}</div>
-            <div style="color:cyan">{{currentLocation[1]}}</div>
-          </div>
         </div>
       </form>
   </ion-content>
