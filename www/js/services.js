@@ -1,3 +1,5 @@
+var API_URL = "http://localhost:3000";
+
 angular.module('app.services', [])
 
 // .factory('dojoLoader', function ($q) {
@@ -19,6 +21,33 @@ angular.module('app.services', [])
 //                }
 //            }
 //        })
+//
+
+.factory('userService', function($http) {
+    return {
+        get: function(id) {
+            return $http.get('/users/'+id);
+        },
+        leaderboard: function() {
+            return $http.get('/leaderboard');
+        }
+    }
+})
+
+.factory('gearService', function($http) {
+    return {
+        get: function(id) {
+            return $http.get('/gear/'+id);
+        },
+        recent: function(id) {
+            if (id) return $http.get('/recent?user_name='+id);
+            else return $http.get('/recent');
+        },
+        post: function(data) {
+            return $http.post('/gear', data)
+        }
+    }
+})
 
 .factory('geoLocationService', ['$q', '$http', function($q, $http){
 
